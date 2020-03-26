@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './ShortNews.css';
-import {Fragment} from 'react';
 
 
 
-const url="http://78.40.109.172:5000/";
-
-
+const url="http://194.4.58.191:5000/";
 export class News extends Component {
     state={
         info:''
+      
     }
+        
+    
+    
+       
     refresh(){
-        axios.get(url+'special_offers/'+this.props.match.params.id)
+        axios.get(url+'news/'+this.props.match.params.id)
         .then(res=>{
             this.setState({info:res.data[0]});
         })
+        
         .catch(err=>{})
+        
     }
     componentDidUpdate(){
         this.refresh();
@@ -30,16 +34,21 @@ export class News extends Component {
     render() {
       
         return (
-            <>
+           
+            
+         <div>
             <h6 className="date">{this.state.info.date}</h6>
-            <h1 className="title_offer" style={{maxWidth:"700px"}}>{this.state.info.title} </h1>
+           <div classname="title_block"> <h1 className="title_offer bold" style={{maxWidth:"70%"}}>{this.state.info.title}</h1>
+            </div>
+            <div classname="title_block1"> <p className="title_offer1 bold" style={{maxWidth:"70%"}}>{this.state.info.title}</p>
+            </div>
             <div className="card_offer">
                 <img src={url+this.state.info.main_photo} alt=""/>
             </div>
-            <p className="text_offer">{this.state.info.text && this.state.info.text.split('\n').map((item, key) => {
-  return <Fragment key={key}>{item}<br/></Fragment>
-})}</p>
-            </>
+            <div  className="text_offer"> 
+            <p>{this.state.info.text}</p></div>
+</div>
+           
         )
     }
 }

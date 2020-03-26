@@ -1,6 +1,6 @@
 .model-list{
     margin: 0;
-    padding: 20px;
+    padding: 40px;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -9,11 +9,12 @@
 .model{
     margin-left: 30px;
     padding: 5px;
-    width: 170px;
-    height: 160px;
+    width: 190px;
+    height: 80px;
     display: flex;
     flex-direction: column;
 }
+
 .model:hover{
     border-color: #e7285e;
     box-shadow: 1px 0px 10px 0px rgba(0, 0, 0, 0.47);
@@ -37,9 +38,9 @@
     color: black;
     font-size: 0.9em;
 }
-@media only screen and (max-width: 1000px) {
-    .model-list{
-        flex-direction: column;
-        align-items: center;
+@media (max-width: 768px) {
+    
+    .block{
+        display: none;
     }
-}
+  }

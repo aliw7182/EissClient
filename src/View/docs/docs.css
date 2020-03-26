@@ -1,0 +1,26 @@
+.lok{
+    margin-left: 7%;
+    margin-right: 7%;
+
+}
+.lok p{
+    text-align: left;
+    margin: 25px 0;
+}
+
+.lok h4{
+    margin: 30px 0;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lok h5{
+    font-size: 1.0rem;
+    font-weight: bold;
+}
+
+@media (max-width: 1000px) {  
+    .info{
+        display: none;
+    }
+}

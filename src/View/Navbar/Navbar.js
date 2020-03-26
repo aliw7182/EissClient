@@ -3,12 +3,14 @@ import {MDBDropdown,MDBDropdownItem,MDBDropdownMenu,MDBDropdownToggle,MDBInput} 
 import {Modal,Button} from 'react-bootstrap';
 import {Nav,Navbar,NavDropdown,Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import {message} from 'antd';
+
 import { MDBContainer,MDBAlert, MDBRow, MDBCol, MDBModal,MDBModalHeader,MDBModalBody,MDBModalFooter, MDBIcon,MDBBtn } from
 "mdbreact";
-import ModelList from '../ModelList/ModelList';
 import axios from 'axios';
+import './navbar.css';
 
-const url="http://78.40.109.172:5000/";
+const url="http://194.4.58.191:5000/";
 export class NavbarContainer extends Component {
     state={
         showNapisat:false,
@@ -16,95 +18,43 @@ export class NavbarContainer extends Component {
         phone_napisat:"",
         email_napistal:"",
         message_napisat:"",
-        name_testdrive:"",
-        phone_testdrive:"",
-        email_testdrive:"",
-        model_testdrive:"",
         show:false,
         showConditions:false
     }
     handleClose=()=>{
         this.setState({showNapisat:false});
+        this.setState({phone_napisat:''});
+        this.setState({message_napisat:''});
+        this.setState({name_napisat:''});
+        this.setState({email_napistal:''});
     }
      
     handleOpen=()=>{
         this.setState({showNapisat:true});
-    }
-    handleCloseTest=()=>{
-        this.setState({show:false});
-    }
-     
-    handleOpenTest=()=>{
-        this.setState({show:true});
+        this.setState({phone_napisat:''});
+        this.setState({message_napisat:''});
+        this.setState({name_napisat:''});
+        this.setState({email_napistal:''});
     }
 
     render() {
         return (
             <div>
-                 <Navbar  collapseOnSelect expand="lg" className="justify-content-end navb">
-                 <Navbar.Toggle aria-controls="responsive-navbar-nav2" />
-                    <Navbar.Collapse  id="responsive-navbar-nav2" className="justify-content-end">
-                        <Nav className="nav-resp2">
-                        <Link onClick={this.handleOpen} className="link ">Написать нам</Link>
-                        <Link to="/offers_list" className="link ">Специальные предложения </Link>
-                        <Link className="link " to="/service_company" style={{marginRight:"20px"}}>Сервисные кампании </Link>
-                        </Nav>
-                       
-                    </Navbar.Collapse>
-                    <Navbar.Brand>
-                        <img style={{cursor:"pointer"}} onClick={()=>{window.open("http://www.astana-motors.kz/")}}  src={require('../../img/amlogo.png')} alt="Astana Motors"/>
-                        </Navbar.Brand>
-                        
-                    </Navbar>
+                
                     <Navbar collapseOnSelect expand="lg" className="nav2">
-                    <Navbar.Brand className="subarubrand" style={{marginLeft:"18px"}}>
-                        <Link exact to="/">
-                        <img src={require('../../img/subaru-logo.png')}  alt="Subaru"/>
+                    <Navbar.Brand className="subarubrand" >
+                        <Link exact to="/" >
+                        <img  class="logo"src={require('../../img/logo.png')}  alt="EISS"/> 
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-                        <Nav className="nav-resp justify-content-end">
-                            <MDBDropdown color="info-color">
-                                <MDBDropdownToggle className="navlinks" nav caret>
-                                    <div className="d-none d-md-inline"><strong color="black">Модельный ряд</strong></div>
-                                </MDBDropdownToggle>
-                                <MDBDropdownMenu className="menu" right>
-                                    <ModelList/>
-                                </MDBDropdownMenu>
-                                </MDBDropdown>
-                                <MDBDropdown color="info-color">
-                                <MDBDropdownToggle className="navlinks" nav caret>
-                                    <div className="d-none d-md-inline">Владельцам</div>
-                                </MDBDropdownToggle>
-                                <MDBDropdownMenu className="menu" right>
-                                    <div className="dr-men">
-                                    <div className="dr-item"><Link to="/parts" className="link-dp">Запчасти</Link></div>
-                                    <div className="dr-item"><Link to="/guarantee" className="link-dp">Гарантийное обслуживание</Link></div> 
-                                    <div className="dr-item"><Link  to="/techservice" className="link-dp">Техническое обслуживание</Link></div>
-                                    <div className="dr-item"><Link to="/helpful_info" className="link-dp">Полезная информация</Link></div>
-                                    <div className="dr-item"><Link to="/manual" className="link-dp">Руководства</Link></div>
-                                    <div className="dr-item"><Link to="/info_salon" className="link-dp">Информация для посетителей салонов</Link></div>
-                                </div>
-                                </MDBDropdownMenu>
-                                </MDBDropdown>
-                                <MDBDropdown color="info-color">
-                                <MDBDropdownToggle className="navlinks" nav caret>
-                                    <div className="d-none d-md-inline">О нашей компании</div>
-                                </MDBDropdownToggle>
-                                <MDBDropdownMenu className="menu" right>
-                                <div className="dr-men">
-                                <div className="dr-item"><Link to="/whysubaru" className="link-dp">Почему Subaru?</Link></div>
-                                <div className="dr-item"><Link to="/offers_list" className="link-dp">Новости</Link></div>
-                                <div className="dr-item"><Link to="/dealers" className="link-dp">Дилеры</Link></div>
-                                <div className="dr-item"><Link to="/how_become" className="link-dp">Как стать дилером Subaru</Link></div>
-                                </div>
-                                </MDBDropdownMenu>
-                                </MDBDropdown>
-                            <Nav.Link onClick={()=>{window.open("http://subarutrade-in.kz/")}} className="navlinks">Автомобили с пробегом</Nav.Link>
-                                <Nav.Link className="navlinks" onClick={()=>{this.setState({show:true})}} >Тест-Драйв</Nav.Link>
-                                <Nav.Link  className="navlinks mr-sm-4"><Link to="/dealers" style={{color:"inherit"}}>Дилеры</Link></Nav.Link>
-                        </Nav>
+                    <Nav className="nav-resp justify-content-end">
+                        <Nav.Link className="navlinks mr-sm-4"><Link exact to="/" style={{color:"inherit"}}>Главная</Link></Nav.Link>
+                        <Nav.Link className="navlinks" onClick={this.handleOpen} >Задать вопрос</Nav.Link>
+                        <Nav.Link className="navlinks"><Link to="/fdocs" style={{color:"inherit"}}> Договор для физических лиц</Link></Nav.Link>
+                        <Nav.Link className="navlinks"><Link to="/udocs" style={{color:"inherit"}}> Договор для юридических лиц</Link></Nav.Link>
+</Nav>
                     </Navbar.Collapse>  
                 </Navbar>
 
@@ -113,9 +63,9 @@ export class NavbarContainer extends Component {
                 <Modal.Title>Написать нам</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <MDBInput onChange={(e)=>{this.setState({name_napisat:e.target.value})}} icon="user" label="ФИО"/>
-                <MDBInput onChange={(e)=>{this.setState({phone_napisat:e.target.value})}} icon="phone" hint="+7(_ _ _)-_ _ _-_ _-_ _"/>
-                <MDBInput onChange={(e)=>{this.setState({email_napistal:e.target.value})}}
+                <MDBInput required onChange={(e)=>{this.setState({name_napisat:e.target.value})}} icon="user" label="ФИО"/>
+                <MDBInput  required onChange={(e)=>{this.setState({phone_napisat:e.target.value})}} icon="phone" hint="+7(_ _ _)-_ _ _-_ _-_ _"/>
+                <MDBInput  required onChange={(e)=>{this.setState({email_napistal:e.target.value})}}
                             label="E-mail адрес"
                             icon="envelope"
                             group
@@ -134,105 +84,17 @@ export class NavbarContainer extends Component {
                 <Button variant="elegant" onClick={()=>{
                     axios.post(url+"voprsy",{name:this.state.name_napisat,phone_number:this.state.phone_napisat,
                     email:this.state.email_napistal,message:this.state.message_napisat}).then(res=>{
+                        message.success('Ваше сообщение отправлено');
                         this.handleClose();
+                        
+
                     })
                 }}>
                     Отправить
                 </Button>
                 </Modal.Footer>
                 </Modal>
-
-                <Modal   show={this.state.show} onHide={this.handleCloseTest}>
-                    <Modal.Header closeButton>
-                    <Modal.Title>Записаться на тест драйв </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <MDBContainer>
-                     <MDBRow>
-                        <MDBCol md="12">
-                        <form >
-                            <p className="h5 mb-4">Записаться на тест драйв в городе Шымкент</p>
-                            <div className="grey-text">
-                            <MDBInput
-                            onChange={(e)=>{this.setState({name_testdrive:e.target.value})}}
-                                label="ФИО"
-                                icon="user"
-                                group
-                                type="text"
-                                validate
-                                error="wrong"
-                                success="right"
-                            />
-                            <MDBInput
-                            onChange={(e)=>{this.setState({email_testdrive:e.target.value})}}
-                                label="E-mail адрес"
-                                icon="envelope"
-                                group
-                                type="email"
-                                validate
-                                error="wrong"
-                                success="right"
-                            />
-                               
-                             <MDBInput
-                             onChange={(e)=>{this.setState({phone_testdrive:e.target.value})}}
-                                label="Номер телефона"
-                                icon="phone"
-                                group
-                                type="text"
-                                validate
-                                error="wrong"
-                                success="right"
-                            />
-
-                            <select className="browser-default custom-select" onChange={(e)=>{console.log(e.target);
-                             this.setState({model_testdrive:e.target.value})}}>
-                                <option>Выберите модель</option>
-                                <option value="Subaru XV">Subaru XV</option>
-                                <option value="Forester">Forester</option>
-                                <option value="Legacy">Legacy</option>
-                                <option value="Outback">Outback</option>
-                            </select>
-                         
-                             
-                            </div>
-                            <Form.Group controlId="formBasicChecbox">
-                                <Form.Check type="checkbox" label="Мне уже есть 18" />
-                                <Form.Check type="checkbox" label="У меня есть водительские права" />
-                                <Form.Check type="checkbox" label='Я прочитал и согласен с условиями заявки на тест-драйв' />
-                            </Form.Group>
-                            <p onClick={()=>{this.setState({showConditions:true})}}><u style={{cursor:"pointer"}}>Условия заявки на тест драйв</u></p>
-                            <div className="text-center">
-                            <MDBBtn onClick={()=>{
-                                let {name_testdrive,email_testdrive,phone_testdrive,model_testdrive}=this.state;
-                                axios.post(url+'test_drive',{name:name_testdrive,email:email_testdrive,phone_number:phone_testdrive,car_model:model_testdrive})
-                                .then(res=>{this.handleCloseTest()})
-                            }} outline color="elegant">
-                                Отправить <MDBIcon far icon="paper-plane" className="ml-1" />
-                            </MDBBtn>
-                            </div>
-                        </form>
-                        </MDBCol>
-                    </MDBRow>
-                    </MDBContainer>   
-                    </Modal.Body>   
-                    <MDBModal size="lg" isOpen={this.state.showConditions} toggle={()=>{this.setState({showConditions:false})}}>
-                  <MDBModalHeader toggle={()=>{this.setState({showConditions:false})}}>Согласие на обработку персональных данных</MDBModalHeader>
-                  <MDBModalBody>
-                    
-
-Настоящим я выражаю свое безусловное согласие на обработку своих персональных данных (которые предоставлены или могут быть предоставлены мной ТОО «Subaru Kazakhstan») любым способом допустимым законодательством РК, в том числе на сбор, систематизацию, накопление, хранение, уточнение, использование, уничтожение и распространение путем передачи этих данных , а также любым другим компаниям, с которыми ТОО «Subaru Kazakhstan» по собственному усмотрению заключают соответствующие договоры, для следующих основных целей: предоставления мне информации о товарах и услугах, которые потенциально могут представлять интерес; проведения социологических и других исследований, в том числе исследования индекса удовлетворенности потребителей качеством предоставленных товаров и услуг, проводимых ТОО «Subaru Kazakhstan».
-
-Я уведомлен и согласен с тем, что указанное согласие может быть отозвано путем направления в письменной форме уведомления в адрес ТОО «Subaru Kazakhstan».
-
-                  </MDBModalBody>
-                  <MDBModalFooter>
-                    <MDBBtn color="elegant" onClick={()=>{this.setState({showConditions:false})}}>Закрыть</MDBBtn>
-                  </MDBModalFooter>
-                </MDBModal>             
-                </Modal>
-            
-            </div>
+ </div>
         )
     }
 }

@@ -2,235 +2,129 @@ import React from "react";
 import { MDBCol, MDBContainer,MDBIcon,MDBModal, MDBRow,MDBBtn, MDBFooter,MDBInput,MDBModalBody,MDBModalHeader,MDBModalFooter } from "mdbreact";
 import './Footer.css';
 import {Modal,Form} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+// import {EnvironmentTwoTone,ScheduleTwoTone,PhoneTwoTone,MailTwoTone,FileTextTwoTone,MessageTwoTone,IdcardTwoTone} from '@ant-design/icons';
+import {EnvironmentFilled,ScheduleFilled,PhoneFilled,MailFilled,FileTextFilled,MessageFilled,IdcardFilled} from '@ant-design/icons';
 
-const url="http://78.40.109.172:5000/";
+
+const url="http://194.4.58.191:5000/";
 
 
 class index extends React.Component {
   state={
+    showNapisat:false,
+    name_napisat:"",
+    phone_napisat:"",
+    email_napistal:"",
+    message_napisat:"",
     show:false,
-    showConditions:false,
-    name_testdrive:"",
-    phone_testdrive:"",
-    email_testdrive:"",
-    model_testdrive:""
+    showConditions:false
     }
     handleClose=()=>{
-        this.setState({show:false});
-    }
-    
-    handleOpen=()=>{
-        this.setState({show:true});
-    }
+      this.setState({showNapisat:false});
+      this.setState({phone_napisat:''});
+      this.setState({message_napisat:''});
+      this.setState({name_napisat:''});
+      this.setState({email_napistal:''});
+  }
+   
+  handleOpen=()=>{
+      this.setState({showNapisat:true});
+      this.setState({phone_napisat:''});
+      this.setState({message_napisat:''});
+      this.setState({name_napisat:''});
+      this.setState({email_napistal:''});
+  }
 
   render(){
   return (
+    <div>
     <MDBFooter color="dark" className="page-footer font-small pt-4 mt-4">
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
-          <MDBCol className="gf" md="3 ">
+          <MDBCol className="gf" md="6">
             <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">
               Контакты
             </h5>
-            <p>
-            ТОО "Eurasia Motor Shymkent" <br/>
-             Наш адрес: <br/>г.ШЫмкент Тамерлановское шоссе, 90а <br/>т.: 8 (7252) 555-340
-
+            <p className="hover">
+            <a  title="местоположение в 2GIS" onClick={()=>{window.open("https://2gis.kz/karaganda/firm/70000001040199047/73.084762,49.805183?floor=1&m=73.085347,49.805275/17.41/p/45/r/22.88")}}><EnvironmentFilled /> Адрес:  г. Караганда, пр. Бухар-Жырау, 49/6, офис 609, 414Б. (БЦ Казахстан) </a><br/>
+            <ScheduleFilled /> График работы: ПН-ПТ: 8:00-17:00 <br/>
+            <PhoneFilled /> Приемная: 8-(7212) 99-60-47<br/>
+            <a title="отправить нам сообщение" href={ "mailto:"+"info_eiss@mail.ru"} ><MailFilled /> info_eiss@mail.ru </a> <br/>
+            <FileTextFilled /> БИН 090440014466
             </p>
           </MDBCol>
           <hr className="clearfix w-100 d-md-none" />
-          <MDBCol className="gf" md="2">
-            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">
-              Модели
-            </h5>
-            <ul className="list-unstyled">
-              <li>
-                <Link to="/models/subaruxv"> <i className="fas fa-car-side"></i> Subaru XV</Link>
-              </li>
-              <li>
-                <Link to="/models/forester"> <i className="fas fa-car-side"></i> Forester</Link>
-              </li>
-              <li>
-                <Link  to="/models/outback"> <i className="fas fa-car-side"></i> Outback</Link>
-              </li>
-              <li>
-                <Link to="/models/legacy"> <i className="fas fa-car-side"></i> Legacy</Link>
-              </li>
-              <li>
-                <Link onClick={this.handleOpen}> <i className="fab fa-empire"></i> Тест-драйв</Link>
-              </li>
-            </ul>
-          </MDBCol>
+          
           <hr className="clearfix w-100 d-md-none" />
-          <MDBCol className="gf" md="4">
+          <MDBCol className="gf" md="6">
             <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">
               Информация
             </h5>
             <ul className="list-unstyled">
+              
+            <li onClick={this.handleOpen} >
+            <MessageFilled /> Задать вопрос</li>
+
               <li>
-                <Link to="/whysubaru"> <i className="fab fa-bandcamp"></i> Почему Subaru?</Link>
+                <Link to="/fdocs"><IdcardFilled /> Заключить договор (физическим лицам)</Link>
               </li>
               <li>
-                <Link to="/offers_list"><i className="fas fa-user-tag"></i> Специальные предложения</Link>
-              </li>
-              <li>
-              <Link to="/choose"><i className="fas fa-car"></i> Как подобрать авто?</Link>
-              </li>
-              <li>
-              <Link to="/getcredit"> <i className="fas fa-question-circle"></i> Как оформить кредит?</Link>
-              </li>
-              <li>
-              <Link to="/credit"><i className="fas fa-book"></i> Кредитные программы</Link>
+                <Link to="/udocs"><IdcardFilled /> Заключить договор (юридическим лицам)</Link>
               </li>
             </ul>
           </MDBCol>
           <hr className="clearfix w-100 d-md-none" />
-          <MDBCol className="gf" md="2">
-            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">
-              Дилеры
-            </h5>
-            <ul className="list-unstyled">
-            <li>
-              <Link to="/dealers"> <i className="fas fa-atlas"></i> Дилеры</Link>
-              </li>
-              <li>
-              <Link onClick={()=>{window.open("https://www.subaru-global.com/")}}> <i className="fas fa-globe"></i> Subaru в мире</Link>
-              </li>
-            </ul>
-          </MDBCol>
+          
         </MDBRow>
       </MDBContainer>
-      <hr />
-      <div className="text-center py-3">
-            <p className="info">Производитель оставляет за собой право изменять спецификацию и цены, указанные в данной рекламе/прайс-листе, без предварительного уведомления. Информация о ценах на продукцию, модельном ряде и комплектациях представленная в настоящей рекламе/прайс-листе, носит исключительно информационный характер. Указанные цены являются максимальными ценами перепродажи, могут отличаться от действительных цен Дилеров Subaru. Приобретение любой продукции осуществляется в соответствии с условиями индивидуального договора купли- продажи. Представленная в рекламе/прайс-листе информация о продукции также не означает, что данная продукция имеется в наличии у Дилеров Subaru для продажи. Для получения информации о наличии автомобилей, а также подробных сведений об автомобилях вы можете уточнить в отделе продаж у ближайших к вам Дилеров Subaru.</p>
-      </div>
-      <hr />
-      <div className="text-center bottom">
-        <ul className="list-unstyled list-inline">
-          <li className="list-inline-item">
-            <a className="btn-floating btn-sm btn-fb mx-1">
-              <i className="fab fa-facebook-f"> </i>
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a className="btn-floating btn-sm btn-tw mx-1">
-              <i className="fab fa-twitter"> </i>
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a className="btn-floating btn-sm btn-gplus mx-1">
-              <i className="fab fa-google-plus"> </i>
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a className="btn-floating btn-sm btn-li mx-1">
-              <i className="fab fa-linkedin-in"> </i>
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a className="btn-floating btn-sm btn-dribbble mx-1">
-              <i className="fab fa-dribbble"> </i>
-            </a>
-          </li>
-        </ul>
-      </div>
+      
       <div className="footer-copyright text-center py-3 bottom" >
         <MDBContainer fluid>
-          &copy; {new Date().getFullYear()} Subaru.kz
+          ТОО «ЭнергоИнвестСтройСервис» &copy; {new Date().getFullYear()}
         </MDBContainer>
       </div>
-      <Modal   show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                    <Modal.Title>Записаться на тест драйв </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <MDBContainer>
-                     <MDBRow>
-                        <MDBCol md="12">
-                        <form >
-                            <p className="h5 mb-4">Записаться на тест драйв в городе Шымкент</p>
-                            <div className="grey-text">
-                            <MDBInput
-                            onChange={(e)=>{this.setState({name_testdrive:e.target.value})}}
-                                label="ФИО"
-                                icon="user"
-                                group
-                                type="text"
-                                validate
-                                error="wrong"
-                                success="right"
-                            />
-                            <MDBInput
-                            onChange={(e)=>{this.setState({email_testdrive:e.target.value})}}
-                                label="E-mail адрес"
-                                icon="envelope"
-                                group
-                                type="email"
-                                validate
-                                error="wrong"
-                                success="right"
-                            />
-                               
-                             <MDBInput
-                             onChange={(e)=>{this.setState({phone_testdrive:e.target.value})}}
-                                label="Номер телефона"
-                                icon="phone"
-                                group
-                                type="text"
-                                validate
-                                error="wrong"
-                                success="right"
-                            />
-
-                            <select className="browser-default custom-select" onChange={(e)=>{this.setState({model_testdrive:e.target.value})}}>
-                                <option>Выберите модель</option>
-                                <option value="Subaru XV">Subaru XV</option>
-                                <option value="Forester">Forester</option>
-                                <option value="Legacy">Legacy</option>
-                                <option value="Outback">Outback</option>
-                            </select>
-                         
-                             
-                            </div>
-                            <Form.Group controlId="formBasicChecbox">
-                                <Form.Check type="checkbox" label="Мне уже есть 18" />
-                                <Form.Check type="checkbox" label="У меня есть водительские права" />
-                                <Form.Check type="checkbox" label='Я прочитал и согласен с условиями заявки на тест-драйв' />
-                            </Form.Group>
-                            <p onClick={()=>{this.setState({showConditions:true})}}><u style={{cursor:"pointer"}}>Условия заявки на тест драйв</u></p>
-                            <div className="text-center">
-                            <MDBBtn onClick={()=>{
-                              let {name_testdrive,email_testdrive,phone_testdrive,model_testdrive}=this.state;
-                              axios.post(url+'test_drive',{name:name_testdrive,email:email_testdrive,phone_number:phone_testdrive,car_model:model_testdrive})
-                              .then(res=>{this.handleClose()})
-                            }} outline color="elegant">
-                                Отправить <MDBIcon far icon="paper-plane" className="ml-1" />
-                            </MDBBtn>
-                            </div>
-                        </form>
-                        </MDBCol>
-                    </MDBRow>
-                    </MDBContainer>   
-                    </Modal.Body>   
-                    <MDBModal size="lg" isOpen={this.state.showConditions} toggle={()=>{this.setState({showConditions:false})}}>
-                  <MDBModalHeader toggle={()=>{this.setState({showConditions:false})}}>Согласие на обработку персональных данных</MDBModalHeader>
-                  <MDBModalBody>
-                    
-
-Настоящим я выражаю свое безусловное согласие на обработку своих персональных данных (которые предоставлены или могут быть предоставлены мной ТОО «Subaru Kazakhstan») любым способом допустимым законодательством РК, в том числе на сбор, систематизацию, накопление, хранение, уточнение, использование, уничтожение и распространение путем передачи этих данных , а также любым другим компаниям, с которыми ТОО «Subaru Kazakhstan» по собственному усмотрению заключают соответствующие договоры, для следующих основных целей: предоставления мне информации о товарах и услугах, которые потенциально могут представлять интерес; проведения социологических и других исследований, в том числе исследования индекса удовлетворенности потребителей качеством предоставленных товаров и услуг, проводимых ТОО «Subaru Kazakhstan».
-
-Я уведомлен и согласен с тем, что указанное согласие может быть отозвано путем направления в письменной форме уведомления в адрес ТОО «Subaru Kazakhstan».
-
-                  </MDBModalBody>
-                  <MDBModalFooter>
-                    <MDBBtn color="elegant" onClick={()=>{this.setState({showConditions:false})}}>Закрыть</MDBBtn>
-                  </MDBModalFooter>
-                </MDBModal>             
-                </Modal>
+      
     </MDBFooter>
-  )}
-}
+  
+  <Modal show={this.state.showNapisat} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Написать нам</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <MDBInput required onChange={(e)=>{this.setState({name_napisat:e.target.value})}} icon="user" label="ФИО"/>
+                <MDBInput  required onChange={(e)=>{this.setState({phone_napisat:e.target.value})}} icon="phone" hint="+7(_ _ _)-_ _ _-_ _-_ _"/>
+                <MDBInput  required onChange={(e)=>{this.setState({email_napistal:e.target.value})}}
+                            label="E-mail адрес"
+                            icon="envelope"
+                            group
+                            type="email"
+                            validate
+                            error="wrong"
+                            success="right"
+                        />
+                <MDBInput onChange={(e)=>{this.setState({message_napisat:e.target.value})}} icon="comment" label="Ваше сообщение" type="textarea" outline/>
 
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="white" onClick={this.handleClose}>
+                    Закрыть
+                </Button>
+                <Button variant="elegant" onClick={()=>{
+                    axios.post(url+"voprsy",{name:this.state.name_napisat,phone_number:this.state.phone_napisat,
+                    email:this.state.email_napistal,message:this.state.message_napisat}).then(res=>{
+                        this.handleClose();
+                    })
+                }}>
+                    Отправить
+                </Button>
+                </Modal.Footer>
+                </Modal>
+                </div>
+   )
+}
+  
+}
 export default index;
