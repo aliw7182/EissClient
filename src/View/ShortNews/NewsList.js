@@ -11,12 +11,16 @@ import "./newslist.css"
 
 const url="http://194.4.58.191:5000/";
 const responsive = {
-    superLargeDesktop: {
-        breakpoint: { max: 4000, min: 3000 },
+    GigaLargeDesktop: {
+        breakpoint: { max: 4000, min: 2500 },
         items: 5,
     },
+    superLargeDesktop: {
+        breakpoint: { max: 2500, min: 2000 },
+        items: 4,
+    },
     desktop: {
-        breakpoint: { max: 3000, min: 1024 },
+        breakpoint: { max: 2000, min: 1024 },
         items: 3,
     },
     tablet: {
@@ -42,7 +46,13 @@ export class NewsList extends Component {
     render() {
         return(
         <div className='fff'>
-        <Carousel className='content' responsive={responsive}>
+        <Carousel className='content' 
+        swipeable={false}
+        draggable={false}
+        responsive={responsive}
+        infinite={true}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        deviceType={this.props.deviceType}>
         {this.state.slider_list.map(newss=>{
             return(
                 
@@ -69,6 +79,7 @@ export class NewsList extends Component {
             )})
             }
                      </Carousel>
+                    
                     </div>
                
                

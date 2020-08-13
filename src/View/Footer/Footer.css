@@ -6,8 +6,11 @@ footer ul{
     font-size: 1.0rem;
 }
 
-footer a{
+footer p a{
     font-weight: 400;
+}
+footer a:hover {
+    color: #0000CD;
 }
 
 footer li:hover{

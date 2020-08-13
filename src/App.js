@@ -12,8 +12,10 @@ import {Route,Switch} from 'react-router-dom';
 import NewsList from './View/ShortNews/NewsList';
 import Fdocs from './View/docs/Fdocs';
 import Udocs from './View/docs/Udocs';
-import { useLayoutEffect, useState } from 'react';
-import { text } from 'body-parser';
+import Video from './View/VideoView/Video';
+
+
+
 
 
 
@@ -22,6 +24,7 @@ const MainPage=()=>{
   return(
     <>
     <Slider/>
+    <Video/>
     <div class="cont"><h3 >Новости</h3></div>
     <NewsList/>
     <div class="cont1"><h3 >Наши партнеры</h3></div>

@@ -23,10 +23,8 @@ export class News extends Component {
         .catch(err=>{})
         
     }
-    componentDidUpdate(){
-        this.refresh();
-    }
-    componentWillMount(){
+ 
+    componentDidMount(){
         this.refresh();
         window.scrollTo(0,0);
     }
@@ -46,8 +44,10 @@ export class News extends Component {
                 <img src={url+this.state.info.main_photo} alt=""/>
             </div>
             <div  className="text_offer"> 
-            <p>{this.state.info.text}</p></div>
+            <p>{this.state.info.text}</p>
+           </div>
 </div>
+
            
         )
     }
