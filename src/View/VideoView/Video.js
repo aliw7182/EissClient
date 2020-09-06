@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player'
+import "./Video.css"
 
 class Video extends Component {
     render () { 
       return (
+       
         <div className='player-wrapper'>
-          <ReactPlayer
+       <div >
+          <ReactPlayer className = "player"
             url={"https://youtu.be/znj8lO9T2tQ"}
-            playing={true}
             loop = {true}
-            width= 'auto'
-            height='100vh'
+            playing = {false}
+            width = {"inherit"}
+
+            
             
           />
+          </div>
         </div>
       )
     }

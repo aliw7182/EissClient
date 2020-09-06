@@ -14,7 +14,8 @@
 }
 
 .card_offer img{
-    width: 80%;
+    width: auto;
+    height: auto;
 }
 
 

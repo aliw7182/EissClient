@@ -1,0 +1,22 @@
+.player-wrapper {
+    width: auto; 
+    height: auto;
+    
+  }
+  .player {
+    margin: auto;
+    position: relative; 
+  }
+  
+  
+  .player > div {
+    position: absolute; 
+  }
+  @media only screen and (max-width: 601px) {
+  
+    .player {
+        max-width: 601px;
+    
+      }
+}
+

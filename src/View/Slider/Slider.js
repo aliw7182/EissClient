@@ -15,7 +15,8 @@ export class Slider extends Component {
     }
 render() {
         return (
-            <div className>
+            <div className = "carousel-container">
+
                 <Carousel>
                     {this.state.slider_list.map(slider=>{
                         return(
@@ -29,6 +30,9 @@ render() {
                         )
                     })}
                 </Carousel>
+                <p className = "video-title">
+                Поставщик  ТОО ЭнергоИнвестСтройСервис заведён в кассах Темиртауского РФ (Темиртау, Осакаровка, Нура, Молодежный),также поставщик заведён в мобильном приложении Homebank.
+                </p>
             </div>
         )
     }

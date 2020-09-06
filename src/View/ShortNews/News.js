@@ -6,14 +6,13 @@ import './ShortNews.css';
 
 const url="http://194.4.58.191:5000/";
 export class News extends Component {
+
+    
     state={
         info:''
       
     }
-        
-    
-    
-       
+  
     refresh(){
         axios.get(url+'news/'+this.props.match.params.id)
         .then(res=>{
@@ -28,6 +27,7 @@ export class News extends Component {
         this.refresh();
         window.scrollTo(0,0);
     }
+  
 
     render() {
       
@@ -43,14 +43,15 @@ export class News extends Component {
             <div className="card_offer">
                 <img src={url+this.state.info.main_photo} alt=""/>
             </div>
-            <div  className="text_offer"> 
-            <p>{this.state.info.text}</p>
+            <div  className="text_offer"dangerouslySetInnerHTML={{__html: this.state.info.text}}/>
+        
            </div>
-</div>
+        )
 
            
-        )
-    }
+        
+    
+}
 }
 
 export default News;
