@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ReactPlayer from 'react-player'
 import axios from 'axios';
 import './ShortNews.css';
+import ReactHtmlParser from 'react-html-parser'; 
 
 
 
-const url="http://194.4.58.191:5000/";
+const url="http://localhost:5000/";
 export class News extends Component {
 
     
@@ -25,33 +27,42 @@ export class News extends Component {
  
     componentDidMount(){
         this.refresh();
+        window.YTConfig = {host: 'https://www.youtube.com'}
         window.scrollTo(0,0);
     }
   
 
     render() {
-      
-        return (
-           
-            
-         <div>
+        return (    
+        <div>
             <h6 className="date">{this.state.info.date}</h6>
-           <div classname="title_block"> <h1 className="title_offer bold" style={{maxWidth:"70%"}}>{this.state.info.title}</h1>
+            <div className="title_block">
+                <h1 className="title_offer bold" style={{maxWidth:"70%"}}>{this.state.info.title}</h1>
             </div>
-            <div classname="title_block1"> <p className="title_offer1 bold" style={{maxWidth:"70%"}}>{this.state.info.title}</p>
+            <div className="title_block1">
+                <p className="title_offer1 bold" style={{maxWidth:"70%"}}>{this.state.info.title}</p>
             </div>
             <div className="card_offer">
-                <img src={url+this.state.info.main_photo} alt=""/>
+                {this.state.info.main_photo ? 
+                    <img src={url+this.state.info.main_photo} alt=""/>
+                    : 
+                    <div className='mini-player-wrapper'>
+                        <div>
+                            <ReactPlayer className = "mini-player"
+                                url={this.state.info.video_link+"&origin"+url}
+                                loop = {true}
+                                playing = {false}
+                                width = {"inherit"}
+                                height = {220}
+                            />
+                        </div>
+                    </div>
+                }
             </div>
-            <div  className="text_offer"dangerouslySetInnerHTML={{__html: this.state.info.text}}/>
-        
-           </div>
+            <div className="text_offer">{ReactHtmlParser(this.state.info.text)}</div>
+        </div>
         )
-
-           
-        
-    
-}
+    }
 }
 
 export default News;

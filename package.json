@@ -16,6 +16,7 @@
     "react-bootstrap-slider": "^2.2.2",
     "react-compound-slider": "^2.0.0",
     "react-dom": "^16.13.1",
+    "react-html-parser": "^2.0.2",
     "react-leaf-carousel": "^2.0.3",
     "react-mailto": "^0.4.0",
     "react-media-player": "^0.7.9",
@@ -29,7 +30,7 @@
     "react-yandex-maps": "^4.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=9000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

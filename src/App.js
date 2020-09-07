@@ -24,7 +24,7 @@ const MainPage=()=>{
   return(
     <>
     <Slider/>
-    <Video/>
+    <Video url="https://youtu.be/znj8lO9T2tQ"/>
     <div class="cont"><h3 >Новости</h3></div>
     <NewsList/>
     <div class="cont1"><h3 >Наши партнеры</h3></div>

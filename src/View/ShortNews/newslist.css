@@ -26,3 +26,24 @@
        padding-right:45px;
     }
 }
+
+.mini-player-wrapper {
+    width: auto; 
+    height: auto;
+  }
+  .mini-player {
+    margin: auto;
+    position: relative; 
+  }
+  
+  
+  .mini-player > div {
+    position: absolute; 
+  }
+  @media only screen and (max-width: 601px) {
+  
+    .mini-player {
+        max-width: 601px;
+    
+      }
+}

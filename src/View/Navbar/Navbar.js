@@ -44,9 +44,9 @@ export class NavbarContainer extends Component {
                     <Navbar collapseOnSelect expand="lg" className="nav2">
                     <Navbar.Brand className="subarubrand" >
                         <Link exact to="/" >
-                        <img  class="logo1"src={require('../../img/logoSmth.png')}  alt="EISS"/> 
+                        <img  className="logo1"src={require('../../img/logoSmth.png')}  alt="EISS"/> 
 
-                        <img  class="logo"src={require('../../img/logo.png')}  alt="EISS"/> 
+                        <img  className="logo"src={require('../../img/logo.png')}  alt="EISS"/> 
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

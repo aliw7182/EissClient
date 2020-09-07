@@ -9,13 +9,10 @@ class Video extends Component {
         <div className='player-wrapper'>
        <div >
           <ReactPlayer className = "player"
-            url={"https://youtu.be/znj8lO9T2tQ"}
+            url={this.props.url}
             loop = {true}
             playing = {false}
             width = {"inherit"}
-
-            
-            
           />
           </div>
         </div>
