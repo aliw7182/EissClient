@@ -11,14 +11,16 @@ export class News extends Component {
 
     
     state={
-        info:''
-      
+        info:'',
+        videoId: ""
     }
   
     refresh(){
         axios.get(url+'news/'+this.props.match.params.id)
         .then(res=>{
-            this.setState({info:res.data[0]});
+            let videoId = this.getVideoId(res.data[0].video_link);
+            console.log(this.getVideoId(res.data[0].video_link));
+            this.setState({info:res.data[0], videoId });
         })
         .catch(err=>{})
         
@@ -28,6 +30,17 @@ export class News extends Component {
         this.refresh();
         window.YTConfig = {host: 'https://www.youtube.com'}
         window.scrollTo(0,0);
+    }
+
+    getVideoId(videoLink) {
+        let videoId = "";
+        if (videoLink) {
+            let regExp = /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/;
+            let videoId = videoLink.match(regExp);
+            if (videoId && videoId[1])
+                return videoId[1];
+        }
+        return "";
     }
   
 
@@ -46,23 +59,13 @@ export class News extends Component {
             </div>
             <div className="text_offer">{ReactHtmlParser(this.state.info.text)}</div>
             {
-                this.state.info.video_link ?
-                    <div className="card_offer">
-                        <div className='mini-player-wrapper'>
-                            <div>
-                                <ReactPlayer className = "mini-player"
-                                    url={"https://www.youtube.com/embed/oUFJJNQGwhk"}
-                                    loop = {true}
-                                    playing = {false}
-                                    width = {"inherit"}
-                                    height = {220}
-                                />
-                            </div>
-                        </div>
+                this.state.videoId ?
+                    <div className="player-wrapper">
+                        <iframe width="560" height="315" src={'https://www.youtube.com/embed/' + this.state.videoId} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
-                : ""
+                :
+                ""
             }
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/oUFJJNQGwhk?loop=1" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </div>
         )
     }

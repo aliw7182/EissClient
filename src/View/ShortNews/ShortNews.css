@@ -65,22 +65,13 @@
 
 
 
-.mini-player-wrapper {
-    width: auto; 
-    height: auto;
-  }
-  .mini-player {
+.player-wrapper {
     margin: auto;
-    position: relative; 
-  }
-  
-  
-  .mini-player > div {
-    position: absolute; 
+    width: 0.6vw;
   }
   @media only screen and (max-width: 601px) {
   
-    .mini-player {
+    .player-wrapper {
         max-width: 601px;
     
       }
