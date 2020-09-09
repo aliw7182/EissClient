@@ -56,7 +56,7 @@ export class NavbarContainer extends Component {
                         <Nav.Link className="navlinks" onClick={this.handleOpen} >Задать вопрос</Nav.Link>
                         <Nav.Link className="navlinks"><Link to="/fdocs" style={{color:"inherit"}}> Договор для физических лиц</Link></Nav.Link>
                         <Nav.Link className="navlinks"><Link to="/udocs" style={{color:"inherit"}}> Договор для юридических лиц</Link></Nav.Link>
-</Nav>
+                    </Nav>
                     </Navbar.Collapse>  
                 </Navbar>
 

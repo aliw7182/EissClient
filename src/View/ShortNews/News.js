@@ -20,7 +20,6 @@ export class News extends Component {
         .then(res=>{
             this.setState({info:res.data[0]});
         })
-        
         .catch(err=>{})
         
     }
@@ -43,23 +42,27 @@ export class News extends Component {
                 <p className="title_offer1 bold" style={{maxWidth:"70%"}}>{this.state.info.title}</p>
             </div>
             <div className="card_offer">
-                {this.state.info.main_photo ? 
-                    <img src={url+this.state.info.main_photo} alt=""/>
-                    : 
-                    <div className='mini-player-wrapper'>
-                        <div>
-                            <ReactPlayer className = "mini-player"
-                                url={this.state.info.video_link+"&origin"+url}
-                                loop = {true}
-                                playing = {false}
-                                width = {"inherit"}
-                                height = {220}
-                            />
-                        </div>
-                    </div>
-                }
+                <img src={url+this.state.info.main_photo} alt=""/>
             </div>
             <div className="text_offer">{ReactHtmlParser(this.state.info.text)}</div>
+            {
+                this.state.info.video_link ?
+                    <div className="card_offer">
+                        <div className='mini-player-wrapper'>
+                            <div>
+                                <ReactPlayer className = "mini-player"
+                                    url={"https://www.youtube.com/embed/oUFJJNQGwhk"}
+                                    loop = {true}
+                                    playing = {false}
+                                    width = {"inherit"}
+                                    height = {220}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                : ""
+            }
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/oUFJJNQGwhk?loop=1" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         </div>
         )
     }
