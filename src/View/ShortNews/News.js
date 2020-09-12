@@ -56,7 +56,7 @@ export class News extends Component {
                 <p className="title_offer1 bold" style={{maxWidth:"70%"}}>{this.state.info.title}</p>
             </div>
             <div className="card_offer">
-                <img src={url+this.state.info.main_photo} alt=""/>
+                <img className="news-cover" src={url+this.state.info.main_photo} alt=""/>
             </div>
             <div className="text_offer">{ReactHtmlParser(this.state.info.text)}</div>
             {

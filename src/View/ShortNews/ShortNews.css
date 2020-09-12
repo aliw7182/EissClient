@@ -62,3 +62,7 @@
         display: none;
     }
 }
+
+.news-cover {
+    max-width: 500px;
+}
