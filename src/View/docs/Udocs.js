@@ -1,12 +1,37 @@
 import React, { Component } from 'react';
 import './docs.css';
 import { FileMarkdownOutlined,VerticalAlignBottomOutlined,DownloadOutlined } from '@ant-design/icons';
-import { MDBCol, MDBContainer,MDBIcon,MDBModal, MDBRow,MDBBtn, MDBFooter,MDBInput,MDBModalBody,MDBModalHeader,MDBModalFooter } from "mdbreact";
+import Axios from 'axios';
 
-
+const url = "http://194.4.58.191:5000/";//"http://127.0.0.1:5000/";
+const U_DOC_ID = 2;
 
 export class Udocs extends Component {
- 
+
+    state = {
+        documentList: []
+    }
+
+    componentDidMount() {
+        this.refresh();
+    }
+
+    refresh() {
+        Axios.get(url + "documents/" + U_DOC_ID).then(res => { 
+            if (res.data && res.data.length > 0) {
+                res.data.forEach(doc => {
+                    doc.key = doc.id;
+                });
+            }
+            this.setState({ documentList: res.data }) 
+        });
+    }
+
+    onDownloadClick(record, event) {
+        let doc_id = record.id;
+        window.location.assign(url + "documents/download/" + doc_id ,"_blank");
+    }
+
     render() {
         return (
             <div style={{textAlign:"center"}}>
@@ -17,16 +42,18 @@ export class Udocs extends Component {
                     <p>2. Подача заявления в ТОО «ЭИСС» с приложением всех собранных документов;</p>
                     <p>3. Подписание договора.</p>
                     <p>Заявление и документы представляются в офис клиентского обслуживания ТОО «ЭИСС» либо посредством электронной почты для удобства потребителей.</p>
-                    <a style={{color:"blue"}}onClick={()=>{window.open('http://194.4.58.191:5000/a97d16aa-bca7-46d4-bf12-357af3b1bbc5zayavlenie_na_zakluchenie_dogovora.docx')}}>
-                    <DownloadOutlined />  Заявление на заключение договора</a><br/><br/>
-                
-                    <a style={{color:"blue"}} onClick={()=>{window.open('http://194.4.58.191:5000/be66cc6f-f0c2-43fa-9778-bcecf3887639tipovoy_dogovor_eiss.docx')}}>
-                    <DownloadOutlined />  Типовой договор ЭИСС</a><br/><br/>
-               
-                <a style={{color:"blue"}}onClick={()=>{window.open('http://194.4.58.191:5000/22ef65a3-8c7f-4548-8c2c-0213db892057dogovor_ur_lica.docx')}}><DownloadOutlined />  Договор для юридических лиц</a><br/><br/>
-                
-                    <a style={{color:"blue"}}onClick={()=>{window.open('http://194.4.58.191:5000/36a4f49c-317e-48a6-92a1-34a536a4a903dogovor_dlya_ur_finansiruemih_s_budzheta.docx')}}>
-                    <DownloadOutlined /> Договор для юридических лиц финансируемых с бюджета</a><br/><br/>
+                    {
+                        this.state.documentList ? 
+                            this.state.documentList.map((doc, key) => 
+                                <div>
+                                    <a style={{color:"blue"}} onClick={this.onDownloadClick.bind(this, doc)}>
+                                        <DownloadOutlined />  {doc.document_title}
+                                    </a>
+                                    <br/>
+                                </div>
+                            )
+                        : "Загрузка"
+                    }
                 
                     <h5>Перечень документов, необходимых для заключения договора энергоснабжения (копии).</h5>
                     <p>1. Заявление на имя директора ТОО «ЭИСС» о заключении Договора электроснабжения, с указанием реквизитов предприятия (юридический адрес, ИИН/БИН, номер банковского счета, БИК, наименование банка);</p>

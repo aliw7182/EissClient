@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
 import './docs.css';
-import { MDBCol, MDBContainer,MDBIcon,MDBModal, MDBRow,MDBBtn, MDBFooter,MDBInput,MDBModalBody,MDBModalHeader,MDBModalFooter } from "mdbreact";
+import Axios from 'axios';
 import { FileMarkdownOutlined,DownloadOutlined} from '@ant-design/icons';
 
+const url = "http://194.4.58.191:5000/";//"http://127.0.0.1:5000/";
+const F_DOC_ID = 1;
 
 export class Fdocs extends Component {
+    
+    state = {
+        documentList: []
+    }
+
+    componentDidMount() {
+        this.refresh();
+    }
+
+    refresh() {
+        Axios.get(url + "documents/" + F_DOC_ID).then(res => { 
+            if (res.data && res.data.length > 0) {
+                res.data.forEach(doc => {
+                    doc.key = doc.id;
+                });
+            }
+            this.setState({ documentList: res.data }) 
+        });
+    }
+
+    onDownloadClick(record, event) {
+        let doc_id = record.id;
+        window.location.assign(url + "documents/download/" + doc_id ,"_blank");
+    }
+
     render() {
         return (
             <div style={{textAlign:"center"}}>
@@ -15,11 +42,18 @@ export class Fdocs extends Component {
                     <p>2. Подача заявки в ТОО «ЭИСС» с приложением всех собранных документов;</p>
                     <p>3. Подписание договора.</p>
                     <p>Заявка и документы представляются в офисы клиентского обслуживания ТОО «ЭИСС» либо посредством электронной почты для удобства потребителей.</p>
-                    <a style={{color:"blue"}} onClick={()=>{window.open('http://194.4.58.191:5000/a97d16aa-bca7-46d4-bf12-357af3b1bbc5zayavlenie_na_zakluchenie_dogovora.docx')}}>
-                <DownloadOutlined />  Заявление на заключение договора</a><br/><br/>
-                <a style={{color:"blue"}}onClick={()=>{window.open('http://194.4.58.191:5000/be66cc6f-f0c2-43fa-9778-bcecf3887639tipovoy_dogovor_eiss.docx')}}>
-                <DownloadOutlined />  Типовой договор ЭИСС</a><br/><br/>
-                
+                    {
+                        this.state.documentList ? 
+                            this.state.documentList.map((doc, key) => 
+                                <div>
+                                    <a style={{color:"blue"}} onClick={this.onDownloadClick.bind(this, doc)}>
+                                        <DownloadOutlined />  {doc.document_title}
+                                    </a>
+                                    <br/>
+                                </div>
+                            )
+                        : "Загрузка"
+                    }
                     <h5>Для бытовых потребителей проживающих в многоквартирных домах.</h5>
                     <p>1. Заявление на заключение договора; </p>
                     <p>2. Документ, подтверждающий право собственности (пользования) на помещение в многоквартирном доме;</p>
