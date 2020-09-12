@@ -62,17 +62,3 @@
         display: none;
     }
 }
-
-
-
-.player-wrapper {
-    margin: auto;
-    width: 0.6vw;
-  }
-  @media only screen and (max-width: 601px) {
-  
-    .player-wrapper {
-        max-width: 601px;
-    
-      }
-}

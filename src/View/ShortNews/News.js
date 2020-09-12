@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactPlayer from 'react-player'
+import {MDBRow,MDBCol,MDBIframe} from 'mdbreact';
 import axios from 'axios';
 import './ShortNews.css';
 import ReactHtmlParser from 'react-html-parser'; 
@@ -41,6 +41,7 @@ export class News extends Component {
                 return videoId[1];
         }
         return "";
+        //<iframe width="560" height="315"  frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
     }
   
 
@@ -60,9 +61,13 @@ export class News extends Component {
             <div className="text_offer">{ReactHtmlParser(this.state.info.text)}</div>
             {
                 this.state.videoId ?
-                    <div className="player-wrapper">
-                        <iframe width="560" height="315" src={'https://www.youtube.com/embed/' + this.state.videoId} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                    </div>
+                <MDBRow>
+                    <MDBCol lg="2" md="1" sm="0"></MDBCol>
+                    <MDBCol lg="8" md="10" sm="12">
+                        <MDBIframe src={'https://www.youtube.com/embed/' + this.state.videoId}/>
+                    </MDBCol>
+                    <MDBCol lg="2" md="1" sm="0"></MDBCol>
+                </MDBRow>
                 :
                 ""
             }
