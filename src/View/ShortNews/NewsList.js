@@ -12,7 +12,7 @@ import ReactPlayer from 'react-player'
 import ReactHtmlParser from 'react-html-parser';
 
 
-const url="http://localhost:5000/";
+const url="https://api.eiss.kz/";
 const responsive = {
     GigaLargeDesktop: {
         breakpoint: { max: 4000, min: 2500 },
@@ -62,7 +62,7 @@ export class NewsList extends Component {
                     <MDBCard className='itemd' >
                     {
                         newss.main_photo ?
-                            <MDBCardImage top src={url+newss.main_photo} overlay="white-slight" hover waves alt="MDBCard image cap" />
+                            <MDBCardImage  className = "mb-img" top src={url+newss.main_photo} overlay="white-slight" hover waves alt="MDBCard image cap" />
                                 :
                                 newss.video_link ? 
                                 <div className='mini-player-wrapper'>
@@ -83,18 +83,21 @@ export class NewsList extends Component {
                       <a style={{color:"white",float:"right"}} href="#!" className="activator waves-effect waves-light mr-4">
                     
                          </a>
-                        <MDBCardTitle>{newss.title.substring(0,50)}...</MDBCardTitle>
+                        <MDBCardTitle>{newss.title.substring(0,50)}</MDBCardTitle>
                         <hr className="hr-light" />
                         <MDBCardText className="white-text">
-                            {ReactHtmlParser(newss.text.substring(0,100))}
+                            {ReactHtmlParser(newss.text.substring(0,100))}...
                         </MDBCardText>
-                        </MDBCardBody>
                         <Link to={"/news/"+newss.id} className="black-text d-flex justify-content-end">
-                                <h5>
+                                <h5 className="more-text">
                                     Читать больше
                                     <MDBIcon icon="angle-double-right" />
                                 </h5>
                         </Link>
+                       
+                        </MDBCardBody>
+                        
+                       
                         </MDBCard>
             )})
             }

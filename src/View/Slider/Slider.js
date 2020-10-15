@@ -4,7 +4,7 @@ import {MDBBtn} from 'mdbreact';
 import Axios from 'axios';
 import './ss.css';
 
-const url="http://194.4.58.191:5000/";
+const url="https://api.eiss.kz/";
 export class Slider extends Component {
     state={
         slider_list:[]

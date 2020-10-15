@@ -3,7 +3,7 @@ import './docs.css';
 import { FileMarkdownOutlined,VerticalAlignBottomOutlined,DownloadOutlined } from '@ant-design/icons';
 import Axios from 'axios';
 
-const url = "http://194.4.58.191:5000/";//"http://127.0.0.1:5000/";
+const url = "https://api.eiss.kz/";//"http://127.0.0.1:5000/";
 const U_DOC_ID = 2;
 
 export class Udocs extends Component {

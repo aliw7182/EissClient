@@ -10,7 +10,7 @@ import { MDBContainer,MDBAlert, MDBRow, MDBCol, MDBModal,MDBModalHeader,MDBModal
 import axios from 'axios';
 import './navbar.css';
 
-const url="http://194.4.58.191:5000/";
+const url="https://api.eiss.kz/";
 export class NavbarContainer extends Component {
     state={
         showNapisat:false,

@@ -9,7 +9,7 @@ import axios from 'axios';
 import {EnvironmentFilled,ScheduleFilled,PhoneFilled,MailFilled,FileTextFilled,MessageFilled,IdcardFilled} from '@ant-design/icons';
 
 
-const url="http://194.4.58.191:5000/";
+const url="https://api.eiss.kz/";
 
 
 class index extends React.Component {

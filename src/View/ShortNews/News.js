@@ -6,7 +6,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 
 
-const url="http://localhost:5000/";
+const url="https://api.eiss.kz/";
 export class News extends Component {
 
     
@@ -64,7 +64,7 @@ export class News extends Component {
                 <MDBRow>
                     <MDBCol lg="2" md="1" sm="0"></MDBCol>
                     <MDBCol lg="8" md="10" sm="12">
-                        <MDBIframe src={'https://www.youtube.com/embed/' + this.state.videoId}/>
+                        <MDBIframe className = "video" src={'https://www.youtube.com/embed/' + this.state.videoId}/>
                     </MDBCol>
                     <MDBCol lg="2" md="1" sm="0"></MDBCol>
                 </MDBRow>
