@@ -86,7 +86,7 @@ export class NewsList extends Component {
                         <MDBCardTitle>{newss.title.substring(0,50)}</MDBCardTitle>
                         <hr className="hr-light" />
                         <MDBCardText className="white-text">
-                            {ReactHtmlParser(newss.text.substring(0,100))}...
+                            {ReactHtmlParser(newss.text.substring(0,100))}
                         </MDBCardText>
                         <Link to={"/news/"+newss.id} className="black-text d-flex justify-content-end">
                                 <h5 className="more-text">
